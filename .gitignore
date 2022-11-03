@@ -1,0 +1,4 @@
+.vscode
+
+Brewfile*.lock.json
+dotfiles.zsh.zip
