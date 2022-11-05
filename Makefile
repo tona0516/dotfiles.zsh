@@ -13,6 +13,7 @@ NC        := \033[0m
 .PHONY: deploy
 deploy: \
 	check-prerequisite \
+    create-symlink \
 	install-vim-plugin \
 	complete \
 
@@ -23,6 +24,11 @@ check-prerequisite:
 	command -v git > /dev/null 2>&1
 	command -v curl > /dev/null 2>&1
 	command -v vim > /dev/null 2>&1
+
+.PHONY: create-symlink
+create-symlink:
+	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
+	./create_symlink.zsh
 
 .PHONY: install-vim-plugin
 install-vim-plugin:
@@ -39,8 +45,8 @@ complete:
 #----------------------------------------
 # Test commands
 #----------------------------------------
-.PHONY: run-test-container
- run-test-container: zip-dotfiles build-test-docker-image
+.PHONY: run-test-env
+ run-test-env: zip-dotfiles build-test-docker-image
 	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
 	docker rm -vf $(TEST_CONTAINER)
 	docker run -itd --name $(TEST_CONTAINER) $(TEST_IMAGE)
@@ -60,7 +66,7 @@ build-test-docker-image:
 	docker build -t $(TEST_IMAGE) .
 
 #----------------------------------------
-# Other coomands
+# Other commands
 #----------------------------------------
 .PHONY: install-homebrew
 install-homebrew:
