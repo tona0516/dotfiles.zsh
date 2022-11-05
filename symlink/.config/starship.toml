@@ -1,0 +1,26 @@
+format = """$directory$git_branch$git_state$kubernetes
+\\$ """
+
+add_newline = false
+
+[directory]
+format = "[$path]($style) "
+style = "cyan"
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = ""
+# https://brandcolors.net/
+style = "#6CC644"
+
+[git_state]
+format = '[\[$state\]]($style) '
+# https://brandcolors.net/
+style = "#6CC644"
+
+[kubernetes]
+disabled = false
+format = "[$symbol$context]($style) "
+symbol = "☸"
+# https://cncf-branding.netlify.app/projects/kubernetes/
+style = "#326CE5"

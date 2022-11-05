@@ -14,8 +14,13 @@ NC        := \033[0m
 deploy: \
 	check-prerequisite \
     create-symlink \
+    install-starship \
 	install-vim-plugin \
 	complete \
+
+.PHONY: install-starship
+install-starship:
+	curl -sS https://starship.rs/install.sh | sh
 
 .PHONY: check-prerequisite
 check-prerequisite:
@@ -28,7 +33,7 @@ check-prerequisite:
 .PHONY: create-symlink
 create-symlink:
 	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
-	./create_symlink.zsh
+	./script/create_symlink.zsh
 
 .PHONY: install-vim-plugin
 install-vim-plugin:

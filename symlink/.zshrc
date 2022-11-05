@@ -80,8 +80,9 @@ vim-modified() {
 }
 
 fzf-select-history() {
-  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
-  CURSOR=$#BUFFER
+    BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+    CURSOR=${#BUFFER}
+    zle reset-prompt
 }
 zle -N fzf-select-history
 bindkey '^r' fzf-select-history
@@ -108,7 +109,6 @@ alias sudo-vim='sudo -E vim'
 alias psa="ps aux"
 alias psg="ps aux | grep "
 alias df='df -h'
-alias dotfiles="cd ~/dotfiles"
 alias d="docker"
 alias k="kubectl"
 alias colordiff="colordiff -u"
@@ -124,39 +124,31 @@ source "${ZINIT_HOME}/zinit.zsh"
 fzf_binary_regex="*"
 is_arm_mac && fzf_binary_regex="*darwin*arm64*"
 is_intel_mac && fzf_binary_regex="*darwin*amd64*"
-zinit ice from"gh-r" as"program" bpick"$fzf_binary_regex"
-zinit light junegunn/fzf
+zi ice from"gh-r" as"program" bpick"$fzf_binary_regex"
+zi light junegunn/fzf
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 
-zinit ice src"init.sh"
-zinit light b4b4r07/enhancd
-export ENHANCD_DISABLE_HOME=0
-export ENHANCD_DISABLE_DOT=1
-export ENHANCD_DISABLE_HYPHEN=1
-export ENHANCD_FILTER=fzf
+export ENHANCD_COMMAND=ecd
+[ -n "$(alias cd)" ] && unalias cd # 以前のaliasの設定を削除しておく
+zi ice src"init.sh"
+zi light b4b4r07/enhancd
 
-zinit ice wait lucid
-zinit light zsh-users/zsh-syntax-highlighting
+zi ice wait lucid
+zi light zsh-users/zsh-syntax-highlighting
 
-zinit ice wait lucid
-zinit light zsh-users/zsh-completions
+zi ice wait lucid
+zi light zsh-users/zsh-completions
 
-zinit ice src"zsh-autosuggestions.zsh" wait lucid
-zinit light zsh-users/zsh-autosuggestions
 export ZSH_AUTOSUGGEST_USE_ASYNC=true
+zi ice src"zsh-autosuggestions.zsh" wait lucid
+zi light zsh-users/zsh-autosuggestions
 
-zinit light chrissicool/zsh-256color
+zi light chrissicool/zsh-256color
 
-zinit light mollifier/cd-gitroot
+zi light mollifier/cd-gitroot
 
-zinit light wfxr/forgit
+zi light wfxr/forgit
 
-zinit light jonmosco/kube-ps1
+# Note: need to execute at last
+eval "$(starship init zsh)"
 
-ZSH_VERSION=$(echo $ZSH_VERSION | awk -F. '{printf "%2d%02d%02d", $1,$2,$3}')
-if [ "$ZSH_VERSION" -ge 50300 ]; then
-    zinit ice depth"1" src"gitstatus.prompt.zsh"
-    zinit light romkatv/gitstatus
-else
-    zinit snippet OMZT::steeef
-fi
