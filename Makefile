@@ -68,11 +68,6 @@ build-test-docker-image:
 #----------------------------------------
 # Other commands
 #----------------------------------------
-.PHONY: install-homebrew
-install-homebrew:
-	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
-	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
-
 .PHONY: install-brew-package
 install-brew-package:
 	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
