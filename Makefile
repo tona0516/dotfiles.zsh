@@ -50,25 +50,38 @@ complete:
 #----------------------------------------
 # Test commands
 #----------------------------------------
-.PHONY: run-test-env
- run-test-env: zip-dotfiles build-test-docker-image
+.PHONY: build-image
+build-image:
+	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
+	docker build -t $(TEST_IMAGE) .
+
+.PHONY: run-container
+run-container: build-image
 	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
 	docker rm -vf $(TEST_CONTAINER)
 	docker run -itd --name $(TEST_CONTAINER) $(TEST_IMAGE)
-	docker cp $(DOTFILES_ZIP) $(TEST_CONTAINER):/home/tona0516/
-	docker exec $(TEST_CONTAINER) bash -c "unzip $(DOTFILES_ZIP); rm -f $(DOTFILES_ZIP)"
+
+.PHONY: exec-zsh-container
+exec-zsh-container:
+	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
 	docker exec -it $(TEST_CONTAINER) env TERM=xterm-256color /usr/bin/zsh
 
 .PHONY: zip-dotfiles
 zip-dotfiles:
 	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
 	rm -vf $(DOTFILES_ZIP)
-	zip -r $(DOTFILES_ZIP) ../$(DOTFILES_NAME) -x "*.git*"
+	cd ..; zip -r $(DOTFILES_ZIP) $(DOTFILES_NAME) -x "*.git*"
+	cd ..; mv $(DOTFILES_ZIP) $(DOTFILES_NAME)
 
-.PHONY: build-test-docker-image
-build-test-docker-image:
+.PHONY: put-dotfiles
+put-dotfiles: zip-dotfiles
 	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
-	docker build -t $(TEST_IMAGE) .
+	docker cp $(DOTFILES_ZIP) $(TEST_CONTAINER):/home/tona0516/
+	docker exec $(TEST_CONTAINER) bash -c "rm -r $(DOTFILES_NAME); unzip $(DOTFILES_ZIP); rm $(DOTFILES_ZIP)"
+
+.PHONY: run-test
+run-test: run-container put-dotfiles exec-zsh-container
+	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
 
 #----------------------------------------
 # Other commands
