@@ -1,15 +1,32 @@
-format = """$directory$git_branch$git_state$kubernetes
+format = """
+$host\
+$container\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$kubernetes
 \\$ """
-
 add_newline = false
+
+[hostname]
+format = "[$ssh_symbol$hostname]($style) "
+
+[container]
+format ="[$symbol$name]($style) "
 
 [directory]
 format = "[$path]($style) "
+truncate_to_repo = false
 style = "cyan"
 
 [git_branch]
 format = "[$symbol$branch]($style) "
 symbol = ""
+# https://brandcolors.net/
+style = "#6CC644"
+
+[git_commit]
 # https://brandcolors.net/
 style = "#6CC644"
 
