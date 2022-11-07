@@ -128,8 +128,8 @@ zi ice from"gh-r" as"program" bpick"$fzf_binary_regex"
 zi light junegunn/fzf
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 
-export ENHANCD_COMMAND=ecd
-[ -n "$(alias cd)" ] && unalias cd # 以前のaliasの設定を削除しておく
+export ENHANCD_COMMAND=ed
+# [ -n "$(alias cd)" ] && unalias cd # 以前のaliasの設定を削除しておく
 zi ice src"init.sh"
 zi light b4b4r07/enhancd
 
