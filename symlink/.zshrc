@@ -112,6 +112,11 @@ alias df='df -h'
 alias d="docker"
 alias k="kubectl"
 alias colordiff="colordiff -u"
+alias url-encode='python3 -c "import sys, urllib.parse as parse; print(parse.quote(sys.argv[1]));"'
+alias url-decode='python3 -c "import sys, urllib.parse as parse; print(parse.unquote(sys.argv[1]));"'
+alias base64-urlsafe-encode='python3 -c "import sys,base64; print(base64.urlsafe_b64encode(sys.argv[1].encode()).decode());"'
+alias base64-urlsafe-decode='python3 -c "import sys,base64; print(base64.urlsafe_b64decode(sys.argv[1].encode()).decode());"'
+alias random-generate='python3 -c "import sys,random,string; print(\"\".join([random.choice(string.ascii_letters + string.digits) for n in range(int(sys.argv[1]))]));"'
 
 # install plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -128,13 +133,19 @@ zi ice from"gh-r" as"program" bpick"$fzf_binary_regex"
 zi light junegunn/fzf
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 
-export ENHANCD_COMMAND=ed
+export ENHANCD_COMMAND=enhancd
 # [ -n "$(alias cd)" ] && unalias cd # 以前のaliasの設定を削除しておく
 zi ice src"init.sh"
 zi light b4b4r07/enhancd
+enhancd-select-directory() {
+    enhancd
+    zle reset-prompt
+}
+zle -N enhancd-select-directory
+bindkey '^d' enhancd-select-directory
 
 zi ice wait lucid
-zi light zsh-users/zsh-syntax-highlighting
+zi light zdharma-continuum/fast-syntax-highlighting
 
 zi ice wait lucid
 zi light zsh-users/zsh-completions

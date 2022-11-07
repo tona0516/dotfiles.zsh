@@ -39,6 +39,9 @@ brew "lazygit"
 tap "snyk/tap"
 brew "snyk"
 
+# Docker
+brew "docker"
+
 # others
 brew "bat"
 brew "exa"
