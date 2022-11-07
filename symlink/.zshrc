@@ -117,6 +117,10 @@ alias url-decode='python3 -c "import sys, urllib.parse as parse; print(parse.unq
 alias base64-urlsafe-encode='python3 -c "import sys,base64; print(base64.urlsafe_b64encode(sys.argv[1].encode()).decode());"'
 alias base64-urlsafe-decode='python3 -c "import sys,base64; print(base64.urlsafe_b64decode(sys.argv[1].encode()).decode());"'
 alias random-generate='python3 -c "import sys,random,string; print(\"\".join([random.choice(string.ascii_letters + string.digits) for n in range(int(sys.argv[1]))]));"'
+alias asdf-add-to-global='(){asdf plugin add $1; asdf install $1 latest; asdf global $1 latest}'
+
+ASDF="$(brew --prefix asdf)/libexec/asdf.sh"
+[ -e $ASDF ] && source $ASDF
 
 # install plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"

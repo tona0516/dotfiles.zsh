@@ -1,43 +1,17 @@
+# taps
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+
 # shell
 brew "bash"
 brew "zsh"
 
-# Kubernetes
-brew "kubernetes-cli"
-brew "kubectx"
-brew "stern"
-brew "skaffold"
-brew "minikube"
-
 # Node.js
-brew "node"
 brew "yarn"
-
-# Ruby
-brew "ruby"
-brew "rbenv"
-
-# Python
-brew "python@3.10"
-
-# PHP
-brew "php"
-brew "composer"
-
-# Kotlin
-brew "kotlin"
-brew "ktlint"
-brew "openjdk@11"
-brew "gradle"
 
 # Git
 brew "git"
-brew "pre-commit"
-brew "lazygit"
-
-# snyk
-tap "snyk/tap"
-brew "snyk"
 
 # Docker
 brew "docker"
@@ -46,12 +20,10 @@ brew "docker"
 brew "bat"
 brew "exa"
 brew "colordiff"
-brew "jq"
 brew "qrencode"
 brew "rename"
 brew "tree"
 brew "wget"
-brew "nvim"
 brew "asdf"
 
 if OS.mac?
