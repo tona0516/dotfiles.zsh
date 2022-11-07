@@ -91,3 +91,9 @@ install-brew-package:
 	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
 	brew bundle --file Brewfile
 
+.PHONY: install-asdf-package
+install-asdf-package:
+	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
+	asdf install
+	corepack enable
+	asdf reshim nodejs
