@@ -6,7 +6,6 @@ tap "homebrew/core"
 # shell
 brew "bash"
 brew "zsh"
-brew "fish"
 
 # Git
 brew "git"
