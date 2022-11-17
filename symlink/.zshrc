@@ -119,8 +119,10 @@ alias base64-urlsafe-decode='python3 -c "import sys,base64; print(base64.urlsafe
 alias random-generate='python3 -c "import sys,random,string; print(\"\".join([random.choice(string.ascii_letters + string.digits) for n in range(int(sys.argv[1]))]));"'
 alias asdf-add-to-global='(){asdf plugin add $1; asdf install $1 latest; asdf global $1 latest}'
 
-ASDF="$(brew --prefix asdf)/libexec/asdf.sh"
-[ -e $ASDF ] && source $ASDF
+if [ $(command -v brew) ]; then
+    ASDF="$(brew --prefix asdf)/libexec/asdf.sh"
+    [ -e $ASDF ] && source $ASDF
+fi
 
 # install plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -148,14 +150,12 @@ enhancd-select-directory() {
 zle -N enhancd-select-directory
 bindkey '^d' enhancd-select-directory
 
-zi ice wait lucid
 zi light zdharma-continuum/fast-syntax-highlighting
 
-zi ice wait lucid
 zi light zsh-users/zsh-completions
 
 export ZSH_AUTOSUGGEST_USE_ASYNC=true
-zi ice src"zsh-autosuggestions.zsh" wait lucid
+zi ice src"zsh-autosuggestions.zsh"
 zi light zsh-users/zsh-autosuggestions
 
 zi light chrissicool/zsh-256color
