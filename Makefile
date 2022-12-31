@@ -13,8 +13,8 @@ NC        := \033[0m
 .PHONY: deploy
 deploy: \
 	check-prerequisite \
-    create-symlink \
-    install-starship \
+	create-symlink \
+	install-starship \
 	install-vim-plugin \
 	complete \
 
