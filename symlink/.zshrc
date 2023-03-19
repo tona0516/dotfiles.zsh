@@ -167,3 +167,9 @@ zi light wfxr/forgit
 # Note: need to execute at last
 eval "$(starship init zsh)"
 
+# bun completions
+[ -s "/Users/toyozuminaoya/.bun/_bun" ] && source "/Users/toyozuminaoya/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
