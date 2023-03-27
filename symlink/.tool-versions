@@ -1,4 +1,4 @@
-nodejs 19.0.1
+nodejs lts
 kubectx 0.9.4
 stern 1.22.0
 skaffold 2.0.1
