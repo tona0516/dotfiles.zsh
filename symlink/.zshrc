@@ -88,8 +88,8 @@ zle -N fzf-select-history
 bindkey '^r' fzf-select-history
 
 (is_arm_mac || is_intel_mac) && alias ls='ls -G -F' || alias ls='ls --color=auto -F'
-alias ll='ls -l'
-alias lla='ls -la'
+alias ll='ls -lh'
+alias lla='ls -lha'
 alias sl='ls'
 alias h='hostname'
 alias git='noglob git'
