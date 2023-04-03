@@ -173,3 +173,7 @@ eval "$(starship init zsh)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# golang
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
