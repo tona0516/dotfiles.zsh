@@ -15,6 +15,7 @@ brew "docker"
 
 # Go
 brew "go"
+brew "mage"
 
 # others
 brew "bat"
