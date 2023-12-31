@@ -5,7 +5,8 @@ $directory\
 $git_branch\
 $git_commit\
 $git_state\
-$kubernetes
+$kubernetes\
+$python
 \\$ """
 add_newline = false
 
@@ -41,3 +42,7 @@ format = "[$symbol$context]($style) "
 symbol = "☸"
 # https://cncf-branding.netlify.app/projects/kubernetes/
 style = "#326CE5"
+
+[python]
+format = "[$symbol$virtualenv]($style) "
+symbol = "🐍"
