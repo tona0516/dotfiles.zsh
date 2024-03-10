@@ -15,7 +15,6 @@ brew "docker"
 
 # Go
 brew "go"
-brew "mage"
 
 # others
 brew "bat"
@@ -32,18 +31,14 @@ if OS.mac?
     brew "cocoapods"
     brew "carthage"
     brew "fastlane"
-    brew "swiftlint"
 
     # Mac Apps
     cask "android-studio"
     cask "anydesk"
     cask "discord"
-    # cask "docker"
     cask "gas-mask"
-    cask "google-chrome"
     cask "google-japanese-ime"
     cask "iterm2"
-    cask "postman"
     cask "shiftit"
     cask "visual-studio-code"
     cask "zoom"
