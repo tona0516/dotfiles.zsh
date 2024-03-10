@@ -162,6 +162,7 @@ zi light chrissicool/zsh-256color
 
 zi light mollifier/cd-gitroot
 
+zi ice from"gh-r" ver"23.09.0"
 zi light wfxr/forgit
 
 # Note: need to execute at last
