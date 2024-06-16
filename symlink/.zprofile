@@ -8,6 +8,8 @@ export PATH=$HOME/Library/Android/sdk/emulator:$PATH
 
 # for WSL
 if [ $(command -v /usr/bin/keychain) ]; then
-    /usr/bin/keychain --nogui ~/.ssh/id_rsa
+    /usr/bin/keychain -q --nogui $HOME/.ssh/id_ed25519
     source $HOME/.keychain/$(hostname)-sh
+elif [ $(command -v /usr/bin/apt) ]; then
+    sudo apt install keychain
 fi
