@@ -13,9 +13,6 @@ brew "git"
 # Docker
 brew "docker"
 
-# Go
-brew "go"
-
 # others
 brew "bat"
 brew "exa"
