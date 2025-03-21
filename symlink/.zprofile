@@ -15,3 +15,4 @@ if [ uname = "Linux" ]; then
     sudo apt install keychain
   fi
 fi
+export PATH=$HOME/.nodebrew/current/bin:$PATH

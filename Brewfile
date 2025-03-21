@@ -36,7 +36,7 @@ if OS.mac?
     cask "gas-mask"
     cask "google-japanese-ime"
     cask "iterm2"
-    cask "shiftit"
+    cask "rectangle"
     cask "visual-studio-code"
     cask "zoom"
 
