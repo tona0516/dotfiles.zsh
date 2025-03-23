@@ -1,18 +1,12 @@
-brew "zsh"
-brew "git"
-brew "docker"
-brew "bat"
-brew "tree"
-brew "wget"
-brew "asdf"
+# Note: コマンドラインツールは基本的にDevboxで導入する
 
 if OS.mac?
-    # require password
+    # PW要求
+    cask "docker"
     cask "google-japanese-ime"
     cask "zoom"
 
-    # others
-    brew "fastlane"
+    # その他
     cask "rectangle"
     cask "visual-studio-code"
 end

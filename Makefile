@@ -14,13 +14,10 @@ NC        := \033[0m
 deploy: \
 	check-prerequisite \
 	create-symlink \
+    install-devbox \
 	install-starship \
 	install-vim-plugin \
 	complete \
-
-.PHONY: install-starship
-install-starship:
-	curl -sS https://starship.rs/install.sh | sh
 
 .PHONY: check-prerequisite
 check-prerequisite:
@@ -34,6 +31,18 @@ check-prerequisite:
 create-symlink:
 	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
 	./script/create_symlink.zsh
+
+.PHONY: install-devbox
+install-devbox:
+	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
+	curl -L https://nixos.org/nix/install | bash
+	curl -fsSL https://get.jetify.com/devbox | bash
+	devbox global install
+
+.PHONY: install-starship
+install-starship:
+	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
+	curl -sS https://starship.rs/install.sh | sh
 
 .PHONY: install-vim-plugin
 install-vim-plugin:
@@ -91,9 +100,3 @@ install-brew-package:
 	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
 	brew bundle --file Brewfile
 
-.PHONY: install-asdf-package
-install-asdf-package:
-	@printf "$(CYAN_BOLD)%s$(NC)\n" "$@:"
-	asdf install
-	corepack enable
-	asdf reshim nodejs

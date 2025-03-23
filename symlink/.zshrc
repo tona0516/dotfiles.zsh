@@ -111,18 +111,11 @@ alias psg="ps aux | grep "
 alias df='df -h'
 alias d="docker"
 alias k="kubectl"
-alias colordiff="colordiff -u"
 alias url-encode='python3 -c "import sys, urllib.parse as parse; print(parse.quote(sys.argv[1]));"'
 alias url-decode='python3 -c "import sys, urllib.parse as parse; print(parse.unquote(sys.argv[1]));"'
 alias base64-urlsafe-encode='python3 -c "import sys,base64; print(base64.urlsafe_b64encode(sys.argv[1].encode()).decode());"'
 alias base64-urlsafe-decode='python3 -c "import sys,base64; print(base64.urlsafe_b64decode(sys.argv[1].encode()).decode());"'
 alias random-generate='python3 -c "import sys,random,string; print(\"\".join([random.choice(string.ascii_letters + string.digits) for n in range(int(sys.argv[1]))]));"'
-alias asdf-add-to-global='(){asdf plugin add $1; asdf install $1 latest; asdf global $1 latest}'
-
-if [ $(command -v brew) ]; then
-    ASDF="$(brew --prefix asdf)/libexec/asdf.sh"
-    [ -e $ASDF ] && source $ASDF
-fi
 
 # install plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -132,15 +125,6 @@ if [ ! -e $ZINIT_HOME ]; then
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 
-fzf_binary_regex="*"
-is_arm_mac && fzf_binary_regex="*darwin*arm64*"
-is_intel_mac && fzf_binary_regex="*darwin*amd64*"
-zi ice from"gh-r" as"program" bpick"$fzf_binary_regex"
-zi light junegunn/fzf
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
-
-export ENHANCD_COMMAND=enhancd
-# [ -n "$(alias cd)" ] && unalias cd # 以前のaliasの設定を削除しておく
 zi ice src"init.sh"
 zi light b4b4r07/enhancd
 enhancd-select-directory() {
@@ -151,30 +135,13 @@ zle -N enhancd-select-directory
 bindkey '^d' enhancd-select-directory
 
 zi light zdharma-continuum/fast-syntax-highlighting
-
 zi light zsh-users/zsh-completions
+zi light chrissicool/zsh-256color
+zi light mollifier/cd-gitroot
+zi light wfxr/forgit
 
-export ZSH_AUTOSUGGEST_USE_ASYNC=true
 zi ice src"zsh-autosuggestions.zsh"
 zi light zsh-users/zsh-autosuggestions
 
-zi light chrissicool/zsh-256color
-
-zi light mollifier/cd-gitroot
-
-zi ice from"gh-r" ver"23.09.0"
-zi light wfxr/forgit
-
 # Note: need to execute at last
 eval "$(starship init zsh)"
-
-# bun completions
-[ -s "/Users/toyozuminaoya/.bun/_bun" ] && source "/Users/toyozuminaoya/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# golang
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
